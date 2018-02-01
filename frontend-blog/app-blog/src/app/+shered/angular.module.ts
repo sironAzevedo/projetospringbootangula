@@ -1,4 +1,4 @@
-/* import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import {
   MatAutocompleteModule,
@@ -105,4 +105,4 @@ import {
     MatStepperModule
   ]
 })
-export class MaterialModule { } */
+export class MaterialModule { }

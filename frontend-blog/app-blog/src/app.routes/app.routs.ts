@@ -1,12 +1,9 @@
 import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from '../app/home/home.component';
+import { ConsultaComponent } from '../app/pessoa/consulta/consulta.component';
+import { CadastroComponent } from '../app/pessoa/cadastro/cadastro.component';
  
- 
-import { ConsultaComponent } from './app/pessoa/consulta/consulta.component';
- 
-import {CadastroComponent} from './app/pessoa/cadastro/cadastro.component';
- 
-import { HomeComponent } from './app/home/home.component';
  
 const appRoutes: Routes = [
     { path: 'home',                    component: HomeComponent },
