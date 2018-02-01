@@ -20,13 +20,13 @@ import {routing} from './../app.routes';
     MenuComponent,
     HomeComponent,
     ConsultaComponent,
-    CadastroComponent
+    CadastroComponent,    
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    routing  
   ],
   providers: [ConfigService, PessoaService],
   bootstrap: [AppComponent]
