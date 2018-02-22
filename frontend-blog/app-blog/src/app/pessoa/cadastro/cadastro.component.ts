@@ -28,6 +28,7 @@ export class CadastroComponent implements OnInit, OnDestroy {
 
     /*CARREGADO NA INICIALIZAÇÃO DO COMPONENTE */
     ngOnInit() {
+
         this.assetCadastroForm = this.formBuilder.group({
             pessoaCodigo: [''],
             pessoaNome: [''],
@@ -73,7 +74,7 @@ export class CadastroComponent implements OnInit, OnDestroy {
                 E LIMPAR O FORMULÁRIO PARA INSERIR UM NOVO REGISTRO*/
                 if (res.codigo == 1) {
                     alert(res.mensagem);
-                    this.pessoa = new Pessoa();
+                    this.resetPessoa();
                 }
                 else {
                     /*
@@ -115,8 +116,14 @@ export class CadastroComponent implements OnInit, OnDestroy {
         }
     }
 
-    ngOnDestroy(): void {
-        throw new Error("Method not implemented.");
+    resetPessoa() {
+        this.assetCadastroForm.controls.pessoaCodigo.reset();
+        this.assetCadastroForm.controls.pessoaNome.reset();
+        this.assetCadastroForm.controls.registroAtivo.reset();
     }
 
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete()
+    }
 }

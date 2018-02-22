@@ -25,10 +25,15 @@ export class ConsultaComponent implements OnInit {
 
         /*SETA O TÍTULO */
         this.titulo = "Registros Cadastrados";
+        this.getPessoa();
+    }
 
+
+    getPessoa() {
         /*CHAMA O SERVIÇO E RETORNA TODAS AS PESSOAS CADASTRADAS */
         this.pessoaService.getPessoas().subscribe(res => this.pessoas = res);
     }
+
 
     /**EXCLUI UM REGISTRO QUANDO CLICAMOS NA OPÇÃO EXCLUIR DE UMA 
      * LINHA DA TABELA*/
