@@ -11,7 +11,7 @@ import { HttpModule } from '@angular/http';
 import { routing } from '../app.routes/app.routs';
 import { PessoaService } from './services/pessoa.service';
 import { ConfigService } from './services/config.service';
-import { MaterialModule } from './+shered/angular.module';
+import { SharedModule } from './shered/shared.module';
 
 
 @NgModule({
@@ -29,7 +29,7 @@ import { MaterialModule } from './+shered/angular.module';
     FormsModule,
     HttpModule,
     routing,
-    MaterialModule
+    SharedModule
   ],
   providers: [ConfigService, PessoaService],
   bootstrap: [AppComponent]

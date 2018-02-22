@@ -1,24 +1,28 @@
-<form (ngSubmit)="salvar()">
+<form [formGroup]="assetCadastroForm">
 
-    <br/>
-    <h3>{{titulo}}</h3>
+    <mat-input-container>
+        <input matInput type="text" id="pessoaCodigo" placeholder="Código" formControlName="pessoaCodigo" maxlength="50" [disabled]="false">
+    </mat-input-container>
 
-    <label>Código:
-        <input type="input" name="codigo" size="10" [(ngModel)]="pessoa.codigo" disabled/>
-    </label>
-    <br/><br/>
+    <mat-input-container>
+        <input matInput type="text" mdInput type="text" id="pessoaNome" placeholder="Nome" formControlName="pessoaNome" maxlength="50">
+    </mat-input-container>
 
-    <label>Nome:
-        <input type="input" name="nome" size="30" [(ngModel)]="pessoa.nome" />
-    </label>
-    <br/><br/>
+    <mat-input-container>
+        <input matInput type="text" mdInput type="text" id="emailCliente" placeholder="Email" formControlName="emailCliente">
+    </mat-input-container>
 
-    <label>Registro Ativo:
-        <input type="radio" name="ativo" [(ngModel)]="pessoa.ativo" [value]="true">Sim
-        <input type="radio" name="ativo" [(ngModel)]="pessoa.ativo" [value]="false">Não
-        <br>        
-    </label>
-    <br/><br/>
+    <div>
+        <p>Registro Ativo:</p>
+        <mat-radio-group formControlName="registroAtivo">
+            <mat-radio-button value="true">Sim</mat-radio-button>
+            <!-- disabled is Old API on new ng-material should use 'ng-disables' -->
+            <mat-radio-button value="false">Não</mat-radio-button>
+        </mat-radio-group>
+    </div>
 
-    <button type="submit">Salvar</button>
+
+    <button type="button" mat-raised-button color="primary" (click)="salvar()">
+        <mat-icon>add</mat-icon>
+    </button>
 </form>

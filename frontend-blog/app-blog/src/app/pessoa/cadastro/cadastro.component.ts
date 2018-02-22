@@ -1,27 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { PessoaService } from '../../services/pessoa.service';
 import { Pessoa } from '../../services/pessoa';
 import { Response } from '../../services/response';
 import { Observable } from 'rxjs/Observable';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'app-cadastro-pessoa',
     templateUrl: './cadastro.component.html',
     styleUrls: ["./cadastro.component.css"]
 })
-export class CadastroComponent implements OnInit {
+export class CadastroComponent implements OnInit, OnDestroy {
 
     private titulo: string;
     private pessoa: Pessoa = new Pessoa();
+    assetCadastroForm: FormGroup;
+    destroy$ = new Subject();
 
-    constructor(private pessoaService: PessoaService,
+    constructor(
+        private formBuilder: FormBuilder,
+        private pessoaService: PessoaService,
         private router: Router,
         private activatedRoute: ActivatedRoute) { }
 
     /*CARREGADO NA INICIALIZAÇÃO DO COMPONENTE */
     ngOnInit() {
+        this.assetCadastroForm = this.formBuilder.group({
+            pessoaCodigo: [''],
+            pessoaNome: [''],
+            emailCliente: [''],
+            registroAtivo: ['']
+        });
+
 
         this.activatedRoute.params.subscribe(parametro => {
 
@@ -40,13 +53,19 @@ export class CadastroComponent implements OnInit {
     }
 
     /*FUNÇÃO PARA SALVAR UM NOVO REGISTRO OU ALTERAÇÃO EM UM REGISTRO EXISTENTE */
-    salvar(): void {
+    salvar() {
 
-        /*SE NÃO TIVER CÓDIGO VAMOS INSERIR UM NOVO REGISTRO */
-        if (this.pessoa.codigo == undefined) {
+        const formValue = this.assetCadastroForm.value;
 
-            /*CHAMA O SERVIÇO PARA ADICIONAR UMA NOVA PESSOA */
-            this.pessoaService.addPessoa(this.pessoa).subscribe(response => {
+        const documentInput: Pessoa = {
+            codigo: formValue.pessoaCodigo,
+            nome: formValue.pessoaNome,
+            ativo: formValue.registroAtivo
+        }
+
+        if (formValue.pessoaCodigo == undefined) {
+
+            this.pessoaService.addPessoa(documentInput).subscribe(response => {
 
                 //PEGA O RESPONSE DO RETORNO DO SERVIÇO
                 let res: Response = <Response>response;
@@ -64,17 +83,15 @@ export class CadastroComponent implements OnInit {
                     alert(res.mensagem);
                 }
             },
-                (erro) => {
+                (error) => {
                     /**AQUI VAMOS MOSTRAR OS ERROS NÃO TRATADOS
                       EXEMPLO: SE APLICAÇÃO NÃO CONSEGUIR FAZER UMA REQUEST NA API                        */
-                    alert(erro);
+                    alert(error);
                 });
-
-        }
-        else {
+        } else {
 
             /*AQUI VAMOS ATUALIZAR AS INFORMAÇÕES DE UM REGISTRO EXISTENTE */
-            this.pessoaService.atualizarPessoa(this.pessoa).subscribe(response => {
+            this.pessoaService.atualizarPessoa(documentInput).subscribe(response => {
 
                 //PEGA O RESPONSE DO RETORNO DO SERVIÇO
                 let res: Response = <Response>response;
@@ -97,7 +114,10 @@ export class CadastroComponent implements OnInit {
                     alert(erro);
                 });
         }
+    }
 
+    ngOnDestroy(): void {
+        throw new Error("Method not implemented.");
     }
 
 }
