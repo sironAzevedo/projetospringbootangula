@@ -12,6 +12,9 @@ import { routing } from '../app.routes/app.routs';
 import { PessoaService } from './services/pessoa.service';
 import { ConfigService } from './services/config.service';
 import { SharedModule } from './shered/shared.module';
+import {
+  BrowserAnimationsModule, NoopAnimationsModule
+} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -21,7 +24,7 @@ import { SharedModule } from './shered/shared.module';
     MenuComponent,
     HomeComponent,
     ConsultaComponent,
-    CadastroComponent,  
+    CadastroComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,9 @@ import { SharedModule } from './shered/shared.module';
     FormsModule,
     HttpModule,
     routing,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
   ],
   providers: [ConfigService, PessoaService],
   bootstrap: [AppComponent]

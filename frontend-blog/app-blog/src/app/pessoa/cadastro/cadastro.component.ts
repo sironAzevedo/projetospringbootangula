@@ -38,16 +38,15 @@ export class CadastroComponent implements OnInit, OnDestroy {
 
         this.activatedRoute.params.subscribe(parametro => {
 
-            if (parametro["codigo"] == undefined) {
+            if (parametro.pessoaCodigo == undefined) {
 
                 this.titulo = "Novo Cadastro de Pessoa";
             }
             else {
 
                 this.titulo = "Editar Cadastro de Pessoa";
-                this.pessoaService.getPessoa(Number(parametro["codigo"])).subscribe(res => this.pessoa = res);
+                this.pessoaService.getPessoa(Number(parametro.pessoaCodigo)).subscribe(res => this.pessoa = res);
             }
-
 
         });
     }
