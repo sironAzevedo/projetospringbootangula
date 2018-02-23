@@ -27,3 +27,23 @@ label{
     margin-left: 8px;
     color: #213E8D;
 }
+
+.data-input-message {
+    animation: fadeIn 433ms ease;
+    color: #d50000;
+    font-size: .7em;
+    // width: 121px;
+    // font-weight: bold;
+    line-height: 0.8em;
+}
+
+[data-input-message] {
+    animation: fadeIn 433ms ease;
+    color: #d50000;
+    font-size: .7em;
+    margin-top: -20px;
+    // position: absolute;
+    // width: 121px;
+    // font-weight: bold;
+    line-height: 1em;
+}

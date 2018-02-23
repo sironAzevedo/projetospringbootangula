@@ -3,7 +3,7 @@
 <form [formGroup]="assetCadastroForm">
 
     <mat-input-container>
-        <input matInput type="text" id="pessoaCodigo" placeholder="Código" formControlName="pessoaCodigo" maxlength="50" [disabled]="false">
+        <input matInput type="text" id="pessoaCodigo" placeholder="Código" formControlName="pessoaCodigo" maxlength="50" disabled>
     </mat-input-container>
 
     <mat-input-container>
@@ -11,8 +11,11 @@
     </mat-input-container>
 
     <mat-input-container>
-        <input matInput type="text" mdInput type="text" id="emailCliente" placeholder="Email" formControlName="emailCliente">
+        <input matInput type="text" matInput type="text" id="emailCliente" placeholder="Email" formControlName="emailCliente">
     </mat-input-container>
+    <!-- <div data-input-message class="alert alert-danger" *ngIf="assetCadastroForm.controls?.emailCliente?.errors?.email">
+        <mat-icon>warning</mat-icon> Email invalido.
+    </div> -->
 
     <div>
         <p>Registro Ativo:</p>

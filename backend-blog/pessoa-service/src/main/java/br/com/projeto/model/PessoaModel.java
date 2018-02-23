@@ -18,6 +18,9 @@ public class PessoaModel {
 
 	@Column(name = "ds_nome")
 	private String nome;
+	
+	@Column(name = "ds_email")
+	private String email;
 
 	@Column(name = "fl_ativo", columnDefinition = "BIT")
 	private boolean ativo;
@@ -36,6 +39,14 @@ public class PessoaModel {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public boolean isAtivo() {
@@ -45,4 +56,11 @@ public class PessoaModel {
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
+
+	@Override
+	public String toString() {
+		return "PessoaModel [codigo=" + codigo + ", nome=" + nome + ", email=" + email + ", ativo=" + ativo + "]";
+	}
+	
+	
 }

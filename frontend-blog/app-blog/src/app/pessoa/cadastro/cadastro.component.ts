@@ -11,7 +11,7 @@ import { Subject } from 'rxjs';
 @Component({
     selector: 'app-cadastro-pessoa',
     templateUrl: './cadastro.component.html',
-    styleUrls: ["./cadastro.component.css"]
+    styleUrls: ["./cadastro.component.scss"]
 })
 export class CadastroComponent implements OnInit, OnDestroy {
 
@@ -32,21 +32,29 @@ export class CadastroComponent implements OnInit, OnDestroy {
         this.assetCadastroForm = this.formBuilder.group({
             pessoaCodigo: [''],
             pessoaNome: [''],
-            emailCliente: [''],
+            emailCliente: ['', Validators.email],
             registroAtivo: ['']
         });
 
 
         this.activatedRoute.params.subscribe(parametro => {
 
-            if (parametro.pessoaCodigo == undefined) {
+            if (parametro.codigo == undefined) {
 
                 this.titulo = "Novo Cadastro de Pessoa";
             }
             else {
 
                 this.titulo = "Editar Cadastro de Pessoa";
-                this.pessoaService.getPessoa(Number(parametro.pessoaCodigo)).subscribe(res => this.pessoa = res);
+                this.pessoaService.getPessoa(Number(parametro.codigo))
+                    .subscribe(res => {
+                        this.assetCadastroForm.controls['pessoaCodigo'].setValue(res.codigo);
+                        this.assetCadastroForm.controls['pessoaNome'].setValue(res.nome);
+                        this.assetCadastroForm.controls['emailCliente'].setValue(res.email);
+                        this.assetCadastroForm.controls['registroAtivo'].setValue(res.ativo);
+                        console.log('Registro Ativo = ' + res.ativo);
+                        return this.pessoa = res
+                    });
             }
 
         });
@@ -60,6 +68,7 @@ export class CadastroComponent implements OnInit, OnDestroy {
         const documentInput: Pessoa = {
             codigo: formValue.pessoaCodigo,
             nome: formValue.pessoaNome,
+            email: formValue.emailCliente,
             ativo: formValue.registroAtivo
         }
 
