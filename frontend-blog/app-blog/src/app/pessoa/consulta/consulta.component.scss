@@ -1,12 +1,25 @@
 .example-container {
     display: flex;
     flex-direction: column;
-    min-width: 300px;
+    min-width: 300px; 
   }
   
   .example-header {
     min-height: 64px;
     padding: 8px 24px 0;
+    
+    mat-form-field{
+      font-size: 14px;
+      width: 50%;
+      display: inline-block;
+      position: relative;
+      text-align: left;
+    }
+
+    .search{
+      font-size: 42px;
+      width: 39px;
+    }
   }
   
   .mat-form-field {

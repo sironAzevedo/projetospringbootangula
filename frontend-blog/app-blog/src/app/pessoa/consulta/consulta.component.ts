@@ -9,7 +9,7 @@ import { sortByProperty } from '../../../validators/sort-by';
 @Component({
     selector: 'app-consulta-pessoa',
     templateUrl: './consulta.component.html',
-    styleUrls: ["./consulta.component.css"]
+    styleUrls: ["./consulta.component.scss"]
 })
 export class ConsultaComponent implements OnInit {
 

@@ -1,11 +1,34 @@
 form{
-    position:fixed;
-    left:30%;
-    width:450px;
-    height: 460px;
-    background-color: rgba(230, 230, 230, 0.71);
-    border: 1px solid  rgba(106, 141, 173, 0.71);;
+    position: fixed;
+    left: 11%;
+    width: 750px;
+    height: 393px;
+    /* background-color: rgba(230, 230, 230, 0.71); */
+    border: 1px solid rgba(106, 141, 173, 0.71);
     border-radius: 25px;
+    flex-direction: column;
+    min-width: 300px;
+
+    mat-input-container{
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        display: -webkit-inline-box;
+        margin-bottom: 0em;
+        padding: 8px 0.3em 5px 22px;
+        margin-top: 16px;
+    }
+
+    .alert-cadastro{
+        padding: 8px 0.25rem;
+        margin-bottom: -52px;
+        /* border: 1px solid transparent; */
+        border-radius: 0.25rem;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        width: 178px;
+        /* margin-left: 235px; */
+        margin-top: 9px;
+    }
 }
 
 h3{
@@ -46,17 +69,6 @@ label{
     // width: 121px;
     // font-weight: bold;
     line-height: 1em;
-}
-
-.alert-cadastro{
-    padding: 8px 0.25rem;
-    margin-bottom: 1rem;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
-    width: 178px;
-    margin-left: 184px;
 }
 
 mat-spinner {

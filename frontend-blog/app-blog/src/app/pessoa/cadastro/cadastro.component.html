@@ -1,8 +1,8 @@
 <p>{{titulo}}</p>
 
-<form [formGroup]="assetCadastroForm">
+<form [formGroup]="assetCadastroForm" class="mat-elevation-z8">
 
-    <mat-input-container *ngIf="isViewUpdate()">
+    <mat-input-container *ngIf="isViewUpdate()" class="nomePessoa">
         <input matInput type="text" id="pessoaCodigo" placeholder="Código" formControlName="pessoaCodigo" maxlength="50" readonly="true">
     </mat-input-container>
 
@@ -12,10 +12,10 @@
 
     <mat-input-container>
         <input matInput type="email" matInput type="text" id="emailCliente" placeholder="Email" formControlName="emailCliente">
+        <div data-input-message class="alert-cadastro" *ngIf="assetCadastroForm.controls?.emailCliente?.errors?.email">
+            <mat-icon>warning</mat-icon> Email invalido.
+        </div>
     </mat-input-container>
-    <div data-input-message class="alert-cadastro" *ngIf="assetCadastroForm.controls?.emailCliente?.errors?.email">
-        <mat-icon>warning</mat-icon> Email invalido.
-    </div>
 
     <div>
         <p>Registro Ativo:</p>
