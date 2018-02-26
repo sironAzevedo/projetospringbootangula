@@ -47,3 +47,28 @@ label{
     // font-weight: bold;
     line-height: 1em;
 }
+
+.alert-cadastro{
+    padding: 8px 0.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    width: 178px;
+    margin-left: 184px;
+}
+
+mat-spinner {
+    height: 17px;
+    width: 17px;
+    display: inline-block;    
+    position: relative;
+    top: 2px;
+}
+
+button{
+    &:disabled {
+        pointer-events: none;
+    }    
+}

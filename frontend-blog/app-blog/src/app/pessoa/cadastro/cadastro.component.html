@@ -2,8 +2,8 @@
 
 <form [formGroup]="assetCadastroForm">
 
-    <mat-input-container>
-        <input matInput type="text" id="pessoaCodigo" placeholder="Código" formControlName="pessoaCodigo" maxlength="50" disabled>
+    <mat-input-container *ngIf="isViewUpdate()">
+        <input matInput type="text" id="pessoaCodigo" placeholder="Código" formControlName="pessoaCodigo" maxlength="50" readonly="true">
     </mat-input-container>
 
     <mat-input-container>
@@ -11,23 +11,26 @@
     </mat-input-container>
 
     <mat-input-container>
-        <input matInput type="text" matInput type="text" id="emailCliente" placeholder="Email" formControlName="emailCliente">
+        <input matInput type="email" matInput type="text" id="emailCliente" placeholder="Email" formControlName="emailCliente">
     </mat-input-container>
-    <!-- <div data-input-message class="alert alert-danger" *ngIf="assetCadastroForm.controls?.emailCliente?.errors?.email">
+    <div data-input-message class="alert-cadastro" *ngIf="assetCadastroForm.controls?.emailCliente?.errors?.email">
         <mat-icon>warning</mat-icon> Email invalido.
-    </div> -->
+    </div>
 
     <div>
         <p>Registro Ativo:</p>
         <mat-radio-group formControlName="registroAtivo">
-            <mat-radio-button value="true">Sim</mat-radio-button>
+            <mat-radio-button [value]="true">Sim</mat-radio-button>
             <!-- disabled is Old API on new ng-material should use 'ng-disables' -->
-            <mat-radio-button value="false">Não</mat-radio-button>
+            <mat-radio-button [value]="false">Não</mat-radio-button>
         </mat-radio-group>
     </div>
 
-
-    <button type="button" mat-raised-button color="primary" (click)="salvar()">
-        <mat-icon>add</mat-icon>
+    <button type="button" mat-raised-button color="primary" (click)="salvar()" [disabled]="!assetCadastroForm.valid">
+        <mat-icon *ngIf="assetCadastroForm.valid && !isViewUpdate()">playlist_add</mat-icon>
+        <mat-icon *ngIf="assetCadastroForm.valid && isViewUpdate()">loop</mat-icon>
+        <mat-spinner *ngIf="!assetCadastroForm.valid" class="spinner-cadastro" diameter="30" color="accent"> </mat-spinner>
+        {{descButton}}
     </button>
+
 </form>
