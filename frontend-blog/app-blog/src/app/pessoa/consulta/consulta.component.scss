@@ -20,6 +20,16 @@
       font-size: 42px;
       width: 39px;
     }
+
+    .action{
+      display: inline-block;
+      margin-left: 467px; 
+
+      mat-icon material-icons{
+        height: 30px;
+        width: 30px;
+      }
+    }
   }
   
   .mat-form-field {
@@ -31,4 +41,5 @@
     overflow: auto;
     max-height: 500px;
   }
+  
   

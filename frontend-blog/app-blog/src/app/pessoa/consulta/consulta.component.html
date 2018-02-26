@@ -4,6 +4,16 @@
     <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
+
+    <div class="action">
+        <button mat-button (click)="editar(row.codigo);">
+            <mat-icon>picture_as_pdf</mat-icon>
+        </button>
+        <button mat-button (click)="editar(row.codigo);">
+            <mat-icon>email</mat-icon>
+        </button>
+    </div>
+
 </div>
 
 <div class="example-container mat-elevation-z8">
