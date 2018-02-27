@@ -1,7 +1,19 @@
 package br.com.projeto.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.spi.LoggerFactory;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,8 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.projeto.model.PessoaModel;
 import br.com.projeto.model.ResponseModel;
 import br.com.projeto.repository.PessoaRepository;
+import br.com.projeto.service.impl.emailImpl;
 
-@CrossOrigin(origins  = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/service")
 public class PessoaService {
@@ -109,6 +122,46 @@ public class PessoaService {
 		} catch (Exception e) {
 			return new ResponseModel(0, e.getMessage());
 		}
+	}
+
+	/***
+	 * IMPRESSAO DE RELATORIO
+	 * 
+	 * @return .pdf
+	 */
+	@RequestMapping(value = "/pessoa/download", method = RequestMethod.GET)
+	public void getFileUsuario(HttpServletRequest request, HttpServletResponse response) {
+
+		ServletContext context = request.getServletContext();
+		String fileToDownload = "C:\\Users\\sironazevedo\\Documents\\CV - SIRON AZEVEDO SANTOS DA SILVA.pdf";
+		File file = new File(fileToDownload);
+		try {
+			InputStream inputStream = new FileInputStream(file);
+			response.setContentType(context.getMimeType(fileToDownload));
+			response.setHeader("Content-Disposition", String.format("attachent: filename=\''%s\''", fileToDownload));
+			response.setHeader("Content-Length", String.valueOf(file.length()));
+			IOUtils.copy(inputStream, response.getOutputStream());
+			response.flushBuffer();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value = "/pessoa/enviarEmail/{type}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public @ResponseBody ResponseModel getEnviarEmail(@PathVariable("type") String type) {
+
+		emailImpl email = new emailImpl();
+
+		try {
+			email.sendEmail("sirondba@gmail.com", "sirondba@gmail.com", "teste email", "primeiro teste email");
+			return new ResponseModel(1, "Email enviado com sucesso!");
+
+		} catch (Exception e) {
+			return new ResponseModel(0, e.getMessage());
+		}
+
 	}
 
 }

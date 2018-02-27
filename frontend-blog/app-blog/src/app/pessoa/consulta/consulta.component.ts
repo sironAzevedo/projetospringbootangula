@@ -90,4 +90,8 @@ export class ConsultaComponent implements OnInit {
 
     }
 
+    downloadFile(){
+        this.pessoaService.getFilePessoa();
+    }
+
 }

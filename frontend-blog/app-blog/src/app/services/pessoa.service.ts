@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { Pessoa } from '../services/pessoa';
 import { ConfigService } from './config.service';
+import { saveAs } from 'file-saver/FileSaver';
 
 @Injectable()
 export class PessoaService {
@@ -57,6 +58,25 @@ export class PessoaService {
 
         return this.http.put(this.baseUrlService, JSON.stringify(pessoa), this.options)
             .map(res => res.json());
+    }
+
+    /* IMPRIMIR RELATORIO */
+    getFilePessoa() {
+        const headers = new Headers({
+            "Accept": "application/pdf",
+            "Access-Control-Allow-Origin": "*",
+            "Authorization": "Bearer "
+        });
+       /*  headers.append('Accept', 'application/pdf'); */
+        this.http.get(this.baseUrlService + 'download', { headers: headers })
+            .toPromise()
+            .then(response => this.saveToFileSystem(response));
+    }
+
+    private saveToFileSystem(response) {
+        const filename = 'relatorioPessoa.pdf'
+        const blob = new Blob([response._body], { type: 'application/pdf' });
+        saveAs(blob, filename);
     }
 
 }
