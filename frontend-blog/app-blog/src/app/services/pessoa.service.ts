@@ -8,9 +8,11 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
 
-import { Pessoa } from '../services/pessoa';
+import { Pessoa } from '../blog-model/pessoa-model/pessoa';
+import { Mensagem } from '../blog-model/mensagem-model/mensagem-model';
 import { ConfigService } from './config.service';
 import { saveAs } from 'file-saver/FileSaver';
+import { FILE_TYPE_PDF } from '../blog-constants/blog.constants';
 
 @Injectable()
 export class PessoaService {
@@ -61,13 +63,13 @@ export class PessoaService {
     }
 
     /* IMPRIMIR RELATORIO */
-    getFilePessoa() {
+    getDownloadFile() {
         const headers = new Headers({
             "Accept": "application/pdf",
             "Access-Control-Allow-Origin": "*",
             "Authorization": "Bearer "
         });
-       /*  headers.append('Accept', 'application/pdf'); */
+        /*  headers.append('Accept', 'application/pdf'); */
         this.http.get(this.baseUrlService + 'download', { headers: headers })
             .toPromise()
             .then(response => this.saveToFileSystem(response));
@@ -77,6 +79,11 @@ export class PessoaService {
         const filename = 'relatorioPessoa.pdf'
         const blob = new Blob([response._body], { type: 'application/pdf' });
         saveAs(blob, filename);
+    }
+
+    sendEmail(type: String, mensagem: Mensagem) {
+        return this.http.post(this.baseUrlService + 'enviarEmail/' + type, JSON.stringify(mensagem), this.options)
+            .map(res => res.json());
     }
 
 }

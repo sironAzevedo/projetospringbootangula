@@ -2,11 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { PessoaService } from '../../services/pessoa.service';
-import { Pessoa } from '../../services/pessoa';
+import { Pessoa } from '../../blog-model/pessoa-model/pessoa';
 import { Response } from '../../services/response';
 import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
+
 
 @Component({
     selector: 'app-cadastro-pessoa',

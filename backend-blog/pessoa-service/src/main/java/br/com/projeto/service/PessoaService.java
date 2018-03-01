@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.projeto.model.PessoaModel;
 import br.com.projeto.model.ResponseModel;
+import br.com.projeto.projetoCommon.valueobjects.Mensagem;
 import br.com.projeto.repository.PessoaRepository;
 import br.com.projeto.service.impl.emailImpl;
 
@@ -150,12 +151,13 @@ public class PessoaService {
 	}
 
 	@RequestMapping(value = "/pessoa/enviarEmail/{type}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody ResponseModel getEnviarEmail(@PathVariable("type") String type) {
+	public @ResponseBody ResponseModel getEnviarEmail(@RequestBody Mensagem mensagem,
+			@PathVariable("type") String type) {
 
 		emailImpl email = new emailImpl();
 
 		try {
-			email.sendEmail("sirondba@gmail.com", "sirondba@gmail.com", "teste email", "primeiro teste email");
+			email.sendEmail(mensagem);
 			return new ResponseModel(1, "Email enviado com sucesso!");
 
 		} catch (Exception e) {

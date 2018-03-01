@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { PessoaService } from '../../services/pessoa.service';
-import { Pessoa } from '../../services/pessoa';
+import { Pessoa } from '../../blog-model/pessoa-model/pessoa';
 import { Response } from '../../services/response';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { sortByProperty } from '../../../validators/sort-by';
+import { FILE_TYPE_PDF, FILE_TYPE_EXCEL } from '../../blog-constants/blog.constants';
+
 
 @Component({
     selector: 'app-consulta-pessoa',
@@ -85,13 +87,19 @@ export class ConsultaComponent implements OnInit {
     }
 
     editar(codigo: number): void {
-
         this.router.navigate(['/cadastro-pessoa', codigo]);
-
     }
 
-    downloadFile(){
-        this.pessoaService.getFilePessoa();
+    downloadFile() {
+        this.pessoaService.getDownloadFile();
+    }
+
+    sendEmailPdf() {
+        const type: string = FILE_TYPE_PDF;
+    }
+
+    sendEmailExcel() {
+        const type: string = FILE_TYPE_EXCEL;
     }
 
 }

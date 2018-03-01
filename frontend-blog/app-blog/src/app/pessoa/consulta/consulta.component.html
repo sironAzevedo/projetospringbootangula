@@ -7,11 +7,22 @@
 
     <div class="action">
         <button mat-button (click)="downloadFile()">
-            <mat-icon>picture_as_pdf</mat-icon>
+            <mat-icon>print</mat-icon>
         </button>
-        <button mat-button (click)="editar(row.codigo);">
+        <!-- <button mat-button (click)="editar(row.codigo);">
+            <mat-icon>email</mat-icon>
+        </button> -->
+        <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>email</mat-icon>
         </button>
+        <mat-menu #menu="matMenu" yPosition="above">
+            <button mat-button (click)="sendEmailPdf()">
+                <mat-icon>picture_as_pdf</mat-icon>
+            </button>
+            <button mat-button (click)="sendEmailExcel()">
+                <mat-icon>picture_as_pdf</mat-icon>
+            </button>
+        </mat-menu>
     </div>
 
 </div>
