@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { PessoaService } from '../../services/pessoa.service';
 import { Pessoa } from '../../blog-model/pessoa-model/pessoa';
 import { Response } from '../../services/response';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialogRef, MatDialog } from '@angular/material';
 import { sortByProperty } from '../../../validators/sort-by';
 import { FILE_TYPE_PDF, FILE_TYPE_EXCEL } from '../../blog-constants/blog.constants';
+import { DialogBlogEmailComponent } from '../../shered/components/dialog-blog-email/dialog-blog-email.component';
 
 
 @Component({
@@ -22,8 +23,13 @@ export class ConsultaComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(private pessoaService: PessoaService,
-        private router: Router) { }
+    formDialogRef: MatDialogRef<DialogBlogEmailComponent> | null = null;
+
+    constructor(
+        private pessoaService: PessoaService,
+        private router: Router,
+        public dialog: MatDialog
+    ) { }
 
     ngOnInit() {
 
@@ -96,10 +102,18 @@ export class ConsultaComponent implements OnInit {
 
     sendEmailPdf() {
         const type: string = FILE_TYPE_PDF;
+        this.openDialog(type);
     }
 
     sendEmailExcel() {
         const type: string = FILE_TYPE_EXCEL;
+        this.openDialog(type);
+    }
+
+    openDialog(type: string) {
+        this.formDialogRef = this.dialog.open(DialogBlogEmailComponent, {
+            data: { type: type }
+        });
     }
 
 }

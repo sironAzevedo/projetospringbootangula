@@ -15,6 +15,7 @@ import { SharedModule } from './shered/shared.module';
 import {
   BrowserAnimationsModule, NoopAnimationsModule
 } from '@angular/platform-browser/animations';
+import { DialogBlogEmailComponent } from './shered/components/dialog-blog-email/dialog-blog-email.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import {
     HomeComponent,
     ConsultaComponent,
     CadastroComponent,
+    DialogBlogEmailComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import {
     NoopAnimationsModule,
   ],
   providers: [ConfigService, PessoaService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogBlogEmailComponent]
 })
 export class AppModule { }

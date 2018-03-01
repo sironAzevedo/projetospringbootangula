@@ -20,7 +20,7 @@ import { MaterialModule } from '../+shered/angular.module';
         MaterialModule
     ],
     declarations: [
-        TextLengthPipe
+        TextLengthPipe 
     ],
     entryComponents: [
 
