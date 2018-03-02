@@ -6,23 +6,36 @@
     </mat-form-field>
 
     <div class="action">
+
+        <!-- Menu exluir selecionado: INICIO -->
+        <button mat-icon-button [matMenuTriggerFor]="menuExluir">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menuExluir="matMenu" yPosition="above">
+            <button mat-raised-button color="accent" [disabled]="!pessoas.length > 0 || !selection.selected.length > 0 " (click)="excluirSelecionados()">
+                <mat-icon>delete_sweep</mat-icon>
+                <span>Excluir Selecionados</span>
+            </button>
+        </mat-menu>
+        <!-- Menu excluir selecionado: FINAL -->
+
         <button mat-button (click)="downloadFile()">
             <mat-icon>print</mat-icon>
         </button>
-        <!-- <button mat-button (click)="editar(row.codigo);">
-            <mat-icon>email</mat-icon>
-        </button> -->
-        <button mat-icon-button [matMenuTriggerFor]="menu">
+
+        <!-- Menu print: INICIO -->
+        <button mat-icon-button [matMenuTriggerFor]="menuPrint">
             <mat-icon>email</mat-icon>
         </button>
-        <mat-menu #menu="matMenu" yPosition="above">
+        <mat-menu #menuPrint="matMenu" yPosition="above">
             <button mat-button (click)="sendEmailPdf()">
                 <mat-icon>picture_as_pdf</mat-icon>
             </button>
-            <button mat-button (click)="sendEmailExcel()">
+            <button mat-button (click)="sendEmailExcel()" [disabled]="!selection.selected.length > 0">
                 <mat-icon>picture_as_pdf</mat-icon>
             </button>
         </mat-menu>
+        <!-- Menu print: FINAL -->
     </div>
 
 </div>
@@ -30,6 +43,18 @@
 <div class="example-container mat-elevation-z8">
 
     <mat-table #table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+                </mat-checkbox>
+            </mat-cell>
+        </ng-container>
+
         <!-- ID Column -->
         <ng-container matColumnDef="codigo">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Código </mat-header-cell>
@@ -40,6 +65,11 @@
         <ng-container matColumnDef="nome">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Nome </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.nome}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
         </ng-container>
 
         <!-- Name Column -->

@@ -27,9 +27,9 @@
     </div>
 
     <button type="button" mat-raised-button color="primary" (click)="salvar()" [disabled]="!assetCadastroForm.valid">
-        <mat-icon *ngIf="assetCadastroForm.valid && !isViewUpdate()">playlist_add</mat-icon>
-        <mat-icon *ngIf="assetCadastroForm.valid && isViewUpdate()">loop</mat-icon>
-        <mat-spinner *ngIf="!assetCadastroForm.valid" class="spinner-cadastro" diameter="30" color="accent"> </mat-spinner>
+        <mat-icon *ngIf="!isViewUpdate()">playlist_add</mat-icon>
+        <mat-icon *ngIf="isViewUpdate()">loop</mat-icon>
+        <!-- <mat-spinner *ngIf="!assetCadastroForm.valid" class="spinner-cadastro" diameter="30" color="accent"> </mat-spinner> -->
         {{descButton}}
     </button>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { PessoaService } from '../../services/pessoa.service';
 import { Pessoa } from '../../blog-model/pessoa-model/pessoa';
@@ -7,6 +7,8 @@ import { MatPaginator, MatSort, MatTableDataSource, MatDialogRef, MatDialog } fr
 import { sortByProperty } from '../../../validators/sort-by';
 import { FILE_TYPE_PDF, FILE_TYPE_EXCEL } from '../../blog-constants/blog.constants';
 import { DialogBlogEmailComponent } from '../../shered/components/dialog-blog-email/dialog-blog-email.component';
+import { SelectionModel } from '@angular/cdk/collections';
+import { EventEmitter } from 'events';
 
 
 @Component({
@@ -18,10 +20,11 @@ export class ConsultaComponent implements OnInit {
 
     private pessoas: Pessoa[] = [];
     private titulo: string;
-    displayedColumns = ['codigo', 'nome', 'ativo', 'editar', 'excluir'];
+    displayedColumns = ['select', 'codigo', 'nome', 'email', 'ativo', 'editar', 'excluir'];
     dataSource: MatTableDataSource<Pessoa>;
+    selection = new SelectionModel<Pessoa>(true, []);
     @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatSort) sort: MatSort; 
 
     formDialogRef: MatDialogRef<DialogBlogEmailComponent> | null = null;
 
@@ -86,6 +89,18 @@ export class ConsultaComponent implements OnInit {
 
     }
 
+    /**EXCLUI ITENS SELECIONADOS*/
+    excluirSelecionados() {
+        this.selection.selected.forEach((pessoa: Pessoa) => {
+            this.pessoaService.excluirPessoa(pessoa.codigo).subscribe(response => {
+                this.getPessoa();
+            },
+                (erro) => {
+                    alert(erro);
+                });
+        });
+    }
+
     applyFilter(filterValue: string) {
         filterValue = filterValue.trim(); // Remove whitespace
         filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
@@ -101,19 +116,41 @@ export class ConsultaComponent implements OnInit {
     }
 
     sendEmailPdf() {
-        const type: string = FILE_TYPE_PDF;
-        this.openDialog(type);
+        this.openDialog(FILE_TYPE_PDF);
     }
 
     sendEmailExcel() {
-        const type: string = FILE_TYPE_EXCEL;
-        this.openDialog(type);
+        this.openDialog(FILE_TYPE_EXCEL);
     }
 
     openDialog(type: string) {
         this.formDialogRef = this.dialog.open(DialogBlogEmailComponent, {
-            data: { type: type }
+            data: { type: type, pessoaSelecionada: this.selection.selected }
+        });
+
+        this.formDialogRef.componentInstance.onCloseDialog.subscribe(() => {
+            this.closeFormDialog();
         });
     }
 
+    /** Whether the number of selected elements matches the total number of rows. */
+    isAllSelected() {
+        const numSelected = this.selection.selected.length;
+        const numRows = this.dataSource.data.length;
+        return numSelected === numRows;
+    }
+
+    /** Selects all rows if they are not all selected; otherwise clear selection. */
+    masterToggle() {
+        this.isAllSelected() ?
+            this.selection.clear() :
+            this.dataSource.data.forEach(row => this.selection.select(row));
+    }
+
+    closeFormDialog() {
+        if (this.formDialogRef) {
+            this.formDialogRef.close();
+            this.formDialogRef = null;
+        }
+    }
 }
