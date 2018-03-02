@@ -1,6 +1,6 @@
 export class Mensagem {
     remetente: string;
-    destinatario: Array<Destinatario>;
+    destinatarios: Array<Destinatario>;
     assunto: string;
     texto: string;
     html: boolean;

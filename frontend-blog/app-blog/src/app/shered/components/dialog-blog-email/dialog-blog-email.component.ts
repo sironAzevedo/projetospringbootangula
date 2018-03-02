@@ -3,6 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Pessoa } from '../../../blog-model/pessoa-model/pessoa';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EMAIL_SISTEMA } from '../../../blog-constants/blog.constants';
+import { PessoaService } from '../../../services/pessoa.service';
+import { Mensagem, Destinatario } from '../../../blog-model/mensagem-model/mensagem-model';
 
 @Component({
   selector: 'app-dialog-blog-email',
@@ -14,17 +16,19 @@ export class DialogBlogEmailComponent implements OnInit {
   private pessoas: Pessoa[] = [];
   emailForm: FormGroup;
   @Output() onCloseDialog = new EventEmitter();
+  destinatarios: Destinatario[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<DialogBlogEmailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private pessoaService: PessoaService,
     private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
     this.emailForm = this.formBuilder.group({
       emailRemetente: ['', Validators.email],
-      emailDestinatario: ['', Validators.compose([Validators.required])],
+      emailDestinatario: [''],
       emailMensagem: ['']
     });
 
@@ -41,6 +45,26 @@ export class DialogBlogEmailComponent implements OnInit {
 
   sendEmail() {
 
+    const formValue = this.emailForm.value;
+    const type: string = this.data.type;
+    this.data.pessoaSelecionada.forEach((pessoa: Pessoa) => {
+      const destinatario = {
+        nome: pessoa.nome,
+        email: pessoa.email,
+      } as Destinatario;
+      this.destinatarios.push(destinatario);
+    });
+
+    const sendMessage: Mensagem = {
+      remetente: formValue.emailRemetente,
+      destinatarios: this.destinatarios,
+      assunto: 'Portal SERV: Registro de Clientes em anexo',
+      texto: formValue.emailMensagem,
+      html: false,
+      anexo: true,
+    }
+    this.pessoaService.sendEmail(type, sendMessage);
+    this.onCloseDialog.emit();
   }
 
   cancelEmail() {

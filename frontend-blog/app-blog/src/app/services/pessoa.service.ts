@@ -81,9 +81,12 @@ export class PessoaService {
         saveAs(blob, filename);
     }
 
-    sendEmail(type: String, mensagem: Mensagem) {
-        return this.http.post(this.baseUrlService + 'enviarEmail/' + type, JSON.stringify(mensagem), this.options)
-            .map(res => res.json());
+    sendEmail(type: string, mensagem: Mensagem) {
+        console.log(JSON.stringify(mensagem));
+        return this.http.post(this.baseUrlService + 'enviarEmaill/' + type, JSON.stringify(mensagem), this.options)
+            .map(res => res.json()
+            .catch(console.log(error => error))
+        );
     }
 
 }
