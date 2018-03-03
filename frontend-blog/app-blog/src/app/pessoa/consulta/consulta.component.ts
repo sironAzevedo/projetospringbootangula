@@ -24,7 +24,7 @@ export class ConsultaComponent implements OnInit {
     dataSource: MatTableDataSource<Pessoa>;
     selection = new SelectionModel<Pessoa>(true, []);
     @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort; 
+    @ViewChild(MatSort) sort: MatSort;
 
     formDialogRef: MatDialogRef<DialogBlogEmailComponent> | null = null;
 
@@ -148,9 +148,7 @@ export class ConsultaComponent implements OnInit {
     }
 
     closeFormDialog() {
-        if (this.formDialogRef) {
-            this.formDialogRef.close();
-            this.formDialogRef = null;
-        }
+        this.selection.clear();
+        this.formDialogRef.close();
     }
 }

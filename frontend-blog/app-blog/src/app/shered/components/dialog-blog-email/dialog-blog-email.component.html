@@ -10,14 +10,18 @@
   <div class="form-group" data-backdrop="static">
     <form [formGroup]="emailForm">
       <input class="form-control" type="text" id="remetente" formControlName="emailRemetente" maxlength="50" readonly="true">
-      <input class="form-control" type="text" id="destinatario" placeholder="Destinatário" formControlName="emailDestinatario" maxlength="200">
-      <textarea class="form-control" placeholder="Digite sua mensagem" formControlName="emailMensagem" matTextareaAutosize
-        matAutosizeMinRows="5" matAutosizeMaxRows="5"></textarea>
+      <input class="form-control" type="text" id="destinatario" placeholder="Destinatário" formControlName="emailDestinatario"
+        maxlength="200">
+      <textarea class="form-control" placeholder="Digite sua mensagem" formControlName="emailMensagem" matTextareaAutosize matAutosizeMinRows="5"
+        matAutosizeMaxRows="5"></textarea>
 
 
       <div class="footer">
-        <button type="button" mat-raised-button color="warn" (click)="cancelEmail()">Cancelar</button>
-        <button type="button" mat-raised-button color="primary" (click)="sendEmail()">Enviar</button>
+        <button type="button" mat-raised-button color="warn" (click)="cancelEmail()" [disabled]="isSending">Cancelar</button>
+        <button type="button" mat-raised-button color="primary" (click)="sendEmail()" [disabled]="isSending">
+          <mat-spinner *ngIf="isSending" class="spinner-cadastro" diameter="30" color="accent"> </mat-spinner>
+          Enviar
+        </button>
       </div>
 
     </form>

@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EMAIL_SISTEMA } from '../../../blog-constants/blog.constants';
 import { PessoaService } from '../../../services/pessoa.service';
 import { Mensagem, Destinatario } from '../../../blog-model/mensagem-model/mensagem-model';
+import { Response } from '../../../services/response';
 
 @Component({
   selector: 'app-dialog-blog-email',
@@ -17,6 +18,7 @@ export class DialogBlogEmailComponent implements OnInit {
   emailForm: FormGroup;
   @Output() onCloseDialog = new EventEmitter();
   destinatarios: Destinatario[] = [];
+  isSending: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<DialogBlogEmailComponent>,
@@ -45,6 +47,7 @@ export class DialogBlogEmailComponent implements OnInit {
 
   sendEmail() {
 
+    this.isSending = true;
     const formValue = this.emailForm.value;
     const type: string = this.data.type;
     this.data.pessoaSelecionada.forEach((pessoa: Pessoa) => {
@@ -63,8 +66,16 @@ export class DialogBlogEmailComponent implements OnInit {
       html: false,
       anexo: true,
     }
-    this.pessoaService.sendEmail(type, sendMessage);
-    this.onCloseDialog.emit();
+    this.pessoaService.sendEmail(type, sendMessage).subscribe(response => {
+      let res: Response = <Response>response;
+      if (res.codigo == 1) {
+        this.onCloseDialog.emit();
+        alert(res.mensagem);
+      }
+      else {
+        alert(res.mensagem);
+      }
+    });
   }
 
   cancelEmail() {

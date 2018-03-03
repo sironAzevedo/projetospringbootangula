@@ -83,10 +83,7 @@ export class PessoaService {
 
     sendEmail(type: string, mensagem: Mensagem) {
         console.log(JSON.stringify(mensagem));
-        return this.http.post(this.baseUrlService + 'enviarEmaill/' + type, JSON.stringify(mensagem), this.options)
-            .map(res => res.json()
-            .catch(console.log(error => error))
-        );
+        return this.http.post(this.baseUrlService + 'enviarEmail/' + type, JSON.stringify(mensagem), this.options)
+            .map(res => res.json());
     }
-
 }
