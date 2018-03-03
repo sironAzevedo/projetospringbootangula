@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, ResponseContentType } from '@angular/http';
 import { Headers } from '@angular/http';
 import { RequestOptions } from '@angular/http';
 
@@ -69,8 +69,8 @@ export class PessoaService {
             "Access-Control-Allow-Origin": "*",
             "Authorization": "Bearer "
         });
-        /*  headers.append('Accept', 'application/pdf'); */
-        this.http.get(this.baseUrlService + 'download', { headers: headers })
+        let options = new RequestOptions({ headers: headers, responseType: ResponseContentType.Blob });
+        this.http.get(this.baseUrlService + 'download', options)
             .toPromise()
             .then(response => this.saveToFileSystem(response));
     }
@@ -78,7 +78,12 @@ export class PessoaService {
     private saveToFileSystem(response) {
         const filename = 'relatorioPessoa.pdf'
         const blob = new Blob([response._body], { type: 'application/pdf' });
+        /* Opção para salvar o arquivo */
         saveAs(blob, filename);
+
+        /* Opção de abrir no navegador sem salvar */
+        /* var fileUrl = URL.createObjectURL(blob);
+        window.open(fileUrl); */
     }
 
     sendEmail(type: string, mensagem: Mensagem) {
