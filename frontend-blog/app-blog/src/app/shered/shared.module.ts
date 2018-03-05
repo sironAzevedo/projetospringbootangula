@@ -4,6 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material';
 import { TextLengthPipe } from './pipes/text-length.pipe';
 import { MaterialModule } from '../+shered/angular.module';
+import { PvdHostDirective } from './directives/host.directive';
+import { AutofocusDirective } from './directives/autofocus.directive';
+import { DialogBlogEmailComponent } from './components/dialog-blog-email/dialog-blog-email.component';
+import { DialogMessageComponent } from './components/dialog-message/dialog-message.component';
 
 @NgModule({
     imports: [
@@ -17,13 +21,19 @@ import { MaterialModule } from '../+shered/angular.module';
         CommonModule,
         ReactiveFormsModule,
         TextLengthPipe,
-        MaterialModule
+        MaterialModule,
+        PvdHostDirective,
+        AutofocusDirective,
+        DialogBlogEmailComponent,
+        DialogMessageComponent
     ],
     declarations: [
-        TextLengthPipe 
+        TextLengthPipe,
+        PvdHostDirective,
+        AutofocusDirective,
+        DialogBlogEmailComponent,
+        DialogMessageComponent
     ],
-    entryComponents: [
-
-    ],
+    entryComponents: [DialogBlogEmailComponent, DialogMessageComponent],
 })
 export class SharedModule { }

@@ -15,8 +15,7 @@ import { SharedModule } from './shered/shared.module';
 import {
   BrowserAnimationsModule, NoopAnimationsModule
 } from '@angular/platform-browser/animations';
-import { DialogBlogEmailComponent } from './shered/components/dialog-blog-email/dialog-blog-email.component';
-
+import { RlTagInputModule } from 'angular2-tag-input';
 
 @NgModule({
   declarations: [
@@ -25,8 +24,7 @@ import { DialogBlogEmailComponent } from './shered/components/dialog-blog-email/
     MenuComponent,
     HomeComponent,
     ConsultaComponent,
-    CadastroComponent,
-    DialogBlogEmailComponent
+    CadastroComponent
   ],
   imports: [
     BrowserModule,
@@ -37,9 +35,10 @@ import { DialogBlogEmailComponent } from './shered/components/dialog-blog-email/
     SharedModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
+    RlTagInputModule
   ],
   providers: [ConfigService, PessoaService],
   bootstrap: [AppComponent],
-  entryComponents: [DialogBlogEmailComponent]
+  entryComponents: []
 })
 export class AppModule { }
