@@ -9,6 +9,7 @@ import { FILE_TYPE_PDF, FILE_TYPE_EXCEL } from '../../blog-constants/blog.consta
 import { DialogBlogEmailComponent } from '../../shered/components/dialog-blog-email/dialog-blog-email.component';
 import { SelectionModel } from '@angular/cdk/collections';
 import { EventEmitter } from 'events';
+import { DialogAlertData, DialogMessageComponent } from '../../shered/components/dialog-message/dialog-message.component';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class ConsultaComponent implements OnInit {
     constructor(
         private pessoaService: PessoaService,
         private router: Router,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private dialogService: MatDialog
     ) { }
 
     ngOnInit() {
@@ -65,7 +67,6 @@ export class ConsultaComponent implements OnInit {
             /*CHAMA O SERVIÇO PARA REALIZAR A EXCLUSÃO */
             this.pessoaService.excluirPessoa(codigo).subscribe(response => {
 
-                this.getPessoa();
                 /**PEGA O RESPONSE DO SERVIÇO */
                 let res: Response = <Response>response;
 
@@ -73,17 +74,30 @@ export class ConsultaComponent implements OnInit {
                 * MOSTRAMOS A MENSAGEM RETORNADA PELO SERVIÇO E DEPOIS REMOVEMOS
                 O REGISTRO DA TABELA HTML*/
                 if (res.codigo == 1) {
-                    alert(res.mensagem);
                     this.pessoas.splice(index, 1);
+                    this.getPessoa();
+                    const alertData: DialogAlertData = {
+                        type: 'success',
+                        title: res.mensagem,
+                    };
+                    this.dialogService.open(DialogMessageComponent, { data: alertData });
                 }
                 else {
                     /*0 = EXCEPTION GERADA NO SERVIÇO JAVA */
-                    alert(res.mensagem);
+                    const alertData: DialogAlertData = {
+                        type: 'error',
+                        text: 'Erro excluir cliente',
+                        title: res.mensagem,
+                    };
                 }
             },
                 (erro) => {
                     /*MOSTRA ERROS NÃO TRATADOS */
-                    alert(erro);
+                    const alertData: DialogAlertData = {
+                        type: 'error',
+                        text: 'Erro excluir cliente',
+                        title: erro,
+                    };
                 });
         }
 
@@ -91,9 +105,30 @@ export class ConsultaComponent implements OnInit {
 
     /**EXCLUI ITENS SELECIONADOS*/
     excluirSelecionados() {
+        let listLength: number = this.selection.selected.length;
         this.selection.selected.forEach((pessoa: Pessoa) => {
             this.pessoaService.excluirPessoa(pessoa.codigo).subscribe(response => {
-                this.getPessoa();
+                listLength--;
+                let res: Response = <Response>response;
+                if (listLength <= 0) {
+                    if (res.codigo == 1) {
+                        this.selection.clear();
+                        this.getPessoa();
+                        const alertData: DialogAlertData = {
+                            type: 'success',
+                            title: 'Registros excluidos com sucesso',
+                        };
+                        this.dialogService.open(DialogMessageComponent, { data: alertData });
+                    }
+                    else {
+                        /*0 = EXCEPTION GERADA NO SERVIÇO JAVA */
+                        const alertData: DialogAlertData = {
+                            type: 'error',
+                            text: 'Erro excluir cliente',
+                            title: res.mensagem,
+                        };
+                    }
+                }
             },
                 (erro) => {
                     alert(erro);
