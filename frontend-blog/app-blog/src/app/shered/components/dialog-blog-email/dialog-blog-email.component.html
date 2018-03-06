@@ -13,7 +13,8 @@
 
       <mat-form-field class="form-control">
         <mat-chip-list #chipList>
-          <mat-chip *ngFor="let destinatario of destinatarios" [selectable]="selectable" [removable]="removable" (remove)="remove(destinatario)" mat-max-chips="5">
+          <mat-chip *ngFor="let destinatario of destinatarios" [selectable]="selectable" [removable]="removable" (remove)="remove(destinatario)"
+            mat-max-chips="5">
             {{destinatario.email}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
@@ -28,11 +29,10 @@
       <div class="footer">
         <button type="button" mat-raised-button color="warn" (click)="cancelEmail()" [disabled]="isSending">Cancelar</button>
         <button type="button" mat-raised-button color="primary" (click)="sendEmail()" [disabled]="isSending || !destinatarios.length > 0">
-          <mat-spinner *ngIf="isSending" class="spinner-cadastro" diameter="30" color="accent"> </mat-spinner>
+          <!-- <mat-spinner *ngIf="isSending" class="spinner-cadastro" diameter="30" color="accent"> </mat-spinner> -->
           Enviar
         </button>
       </div>
-
     </form>
   </div>
 
@@ -49,7 +49,8 @@
     </mat-nav-list>
   </div> -->
 
+</div>
 
-
-
+<div class="spinner-cadastro">
+  <mat-spinner *ngIf="isSending" diameter="200" color="accent"> </mat-spinner>
 </div>

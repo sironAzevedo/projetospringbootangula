@@ -30,5 +30,25 @@ div.email{
     .footer{
         margin-left: 560px;
         margin-top: 45px;
-    }
+    } 
 }
+
+.spinner-cadastro{
+    position: fixed;
+    z-index: 1000;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: -192px;
+    left: -236px;
+    bottom: 0;
+    right: 0;
+
+    mat-progress-spinner {
+        display: block;
+        position: relative;
+    }   
+}
+
+ 
