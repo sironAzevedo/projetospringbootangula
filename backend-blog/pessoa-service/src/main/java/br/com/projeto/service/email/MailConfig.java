@@ -61,11 +61,12 @@ public class MailConfig {
 			} else {
 				msg.setText(mensagem.getTexto());
 			}
+
+			this.getTransport(msg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		this.getTransport(msg);
 	}
 
 	public Session getSession() {

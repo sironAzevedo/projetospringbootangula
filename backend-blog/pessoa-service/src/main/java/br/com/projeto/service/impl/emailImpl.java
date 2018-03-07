@@ -10,6 +10,11 @@ import br.com.projeto.service.email.MailConfig;
 public class emailImpl {
 	public void sendEmail(Mensagem mensagem) {
 		MailConfig mailConfig = new MailConfig();
-		mailConfig.sendEmail(mensagem);
+		try {
+			mailConfig.sendEmail(mensagem);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 }

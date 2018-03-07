@@ -1,4 +1,6 @@
-<h3>{{titulo}}</h3>
+<div class="w3-container">
+    <h3>{{titulo}}</h3>
+</div>
 
 <div class="example-header">
     <mat-form-field>
@@ -29,10 +31,12 @@
         </button>
         <mat-menu #menuPrint="matMenu" yPosition="above">
             <button mat-button (click)="sendEmailPdf()">
-                <mat-icon>picture_as_pdf</mat-icon>
+                <!-- <mat-icon>picture_as_pdf</mat-icon> -->
+                <i class="fa fa-file-pdf-o" style="font-size:24px;color:red"></i>
             </button>
             <button mat-button (click)="sendEmailExcel()" [disabled]="!selection.selected.length > 0">
-                <mat-icon>picture_as_pdf</mat-icon>
+                <!-- <mat-icon>picture_as_pdf</mat-icon> -->
+                <i class="fa fa-file-excel-o" style="font-size:24px"></i>
             </button>
         </mat-menu>
         <!-- Menu print: FINAL -->
