@@ -10,6 +10,7 @@ import { DialogBlogEmailComponent } from '../../shered/components/dialog-blog-em
 import { SelectionModel } from '@angular/cdk/collections';
 import { EventEmitter } from 'events';
 import { DialogAlertData, DialogMessageComponent } from '../../shered/components/dialog-message/dialog-message.component';
+import { ToasterConfig, ToasterService } from 'angular2-toaster';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class ConsultaComponent implements OnInit {
         private pessoaService: PessoaService,
         private router: Router,
         public dialog: MatDialog,
-        private dialogService: MatDialog
+        private dialogService: MatDialog,
+        private toasterService: ToasterService
     ) { }
 
     ngOnInit() {
@@ -143,7 +145,7 @@ export class ConsultaComponent implements OnInit {
     }
 
     editar(codigo: number): void {
-        this.router.navigate(['/cadastro-pessoa', codigo]);
+        this.router.navigate(['/cadastro-pessoa', codigo]); 
     }
 
     downloadFile() {
@@ -185,5 +187,17 @@ export class ConsultaComponent implements OnInit {
     closeFormDialog() {
         this.selection.clear();
         this.formDialogRef.close();
+    }
+
+
+    public config: ToasterConfig =
+        new ToasterConfig({
+            showCloseButton: false,
+            tapToDismiss: false,
+            timeout: 2000
+        });
+
+    popToast() {
+        this.toasterService.pop('success', 'Args Title', 'Args Body');
     }
 }

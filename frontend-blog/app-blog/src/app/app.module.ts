@@ -14,7 +14,7 @@ import { ConfigService } from './services/config.service';
 import { SharedModule } from './shered/shared.module';
 import {
   BrowserAnimationsModule, NoopAnimationsModule
-} from '@angular/platform-browser/animations';
+} from '@angular/platform-browser/animations'; 
 import { RlTagInputModule } from 'angular2-tag-input';
 
 @NgModule({
@@ -35,7 +35,7 @@ import { RlTagInputModule } from 'angular2-tag-input';
     SharedModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
-    RlTagInputModule
+    RlTagInputModule 
   ],
   providers: [ConfigService, PessoaService],
   bootstrap: [AppComponent],

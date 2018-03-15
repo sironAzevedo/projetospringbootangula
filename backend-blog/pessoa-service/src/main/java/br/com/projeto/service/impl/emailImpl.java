@@ -7,6 +7,7 @@ import br.com.projeto.service.email.MailConfig;
  *
  * @author siron
  */
+@SuppressWarnings("unused")
 public class emailImpl {
 	public void sendEmail(Mensagem mensagem) {
 		MailConfig mailConfig = new MailConfig();
