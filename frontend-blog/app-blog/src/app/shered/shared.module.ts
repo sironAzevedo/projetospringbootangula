@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material';
@@ -9,6 +9,7 @@ import { AutofocusDirective } from './directives/autofocus.directive';
 import { DialogBlogEmailComponent } from './components/dialog-blog-email/dialog-blog-email.component';
 import { DialogMessageComponent } from './components/dialog-message/dialog-message.component';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
+import { DateFormatPipe } from './pipes/date-format.pipe';
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
         CommonModule,
         ReactiveFormsModule,
         TextLengthPipe,
+        DateFormatPipe,
         MaterialModule,
         PvdHostDirective,
         AutofocusDirective,
@@ -31,6 +33,7 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
     ],
     declarations: [
         TextLengthPipe,
+        DateFormatPipe,
         PvdHostDirective,
         AutofocusDirective,
         DialogBlogEmailComponent,

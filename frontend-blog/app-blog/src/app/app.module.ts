@@ -14,8 +14,11 @@ import { ConfigService } from './services/config.service';
 import { SharedModule } from './shered/shared.module';
 import {
   BrowserAnimationsModule, NoopAnimationsModule
-} from '@angular/platform-browser/animations'; 
+} from '@angular/platform-browser/animations';
 import { RlTagInputModule } from 'angular2-tag-input';
+import { ContaCadastroComponent } from './contas/conta-cadastro/conta-cadastro.component';
+import { ContaConsultaComponent } from './contas/conta-consulta/conta-consulta.component';
+import { ContaMenuComponent } from './contas/conta-menu/conta-menu.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { RlTagInputModule } from 'angular2-tag-input';
     MenuComponent,
     HomeComponent,
     ConsultaComponent,
-    CadastroComponent
+    CadastroComponent,
+    ContaCadastroComponent,
+    ContaConsultaComponent,
+    ContaMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -35,10 +41,10 @@ import { RlTagInputModule } from 'angular2-tag-input';
     SharedModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
-    RlTagInputModule 
+    RlTagInputModule
   ],
   providers: [ConfigService, PessoaService],
   bootstrap: [AppComponent],
-  entryComponents: []
+  entryComponents: [ContaCadastroComponent]
 })
 export class AppModule { }

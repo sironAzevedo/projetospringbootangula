@@ -1,0 +1,34 @@
+<div>
+  <div>
+    <form [formGroup]="assetContaForm">
+
+      <mat-form-field>
+        <mat-select class="form-control" (change)="verifyAddClient($event)" formControlName="conta" placeholder="Tipo de Conta" class="--small">
+          <mat-option *ngFor="let conta of tipoConta" [value]="conta.name">{{conta.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-input-container>
+        <input matInput type="text" mdInput type="text" id="assunto" placeholder="Assunto" formControlName="assunto" maxlength="50">
+      </mat-input-container>
+
+      <mat-form-field class="example-full-width">
+        <input matInput [matDatepicker]="picker" placeholder="Data de vencimento" formControlName="dataVencimento">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker touchUi="true" #picker></mat-datepicker>
+      </mat-form-field>
+    </form>
+  </div>
+</div>
+
+<div class="resumoConta">
+  <p>Tipo da Conta</p>
+  {{ assetContaForm.controls.conta.value }}
+
+  <p>Assuto</p>
+  {{ assetContaForm.controls.assunto.value }}
+
+  <p>Data Vencimento</p>
+  {{ getFormatDate() | formatDate }}
+</div>
