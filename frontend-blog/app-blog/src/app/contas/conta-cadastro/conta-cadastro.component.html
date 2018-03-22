@@ -64,6 +64,15 @@
             </div>
           </div>
         </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <app-simple-list class="list" [items]="contas" (onDeleteContas)="deleteContas($event)"></app-simple-list>
+            </div>
+
+          </div>
+        </div>
       </div>
     </form>
   </div>

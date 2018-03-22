@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Conta, Meses } from '../../blog-model/blog-enum/tipoConta';
 import { DateAdapter, NativeDateAdapter } from '@angular/material';
 import { Observer } from 'rxjs';
+import { Contas } from '../../blog-model/schema';
 
 @Component({
   selector: 'app-conta-cadastro',
@@ -12,6 +13,7 @@ import { Observer } from 'rxjs';
 export class ContaCadastroComponent implements OnInit {
 
   assetContaForm: FormGroup;
+  contas: Contas[] = [];
   meses: string[] = Object.keys(Meses);
   tipoConta = [
     { id: '1', name: Conta.ALUGUEL },
@@ -37,16 +39,7 @@ export class ContaCadastroComponent implements OnInit {
       dataVencimento: [''],
       dataPagamento: [''],
       comentario: ['']
-      /* pessoaNome: ['', Validators.compose([Validators.required])],
-      emailCliente: ['', Validators.email],
-      registroAtivo: ['', Validators.compose([Validators.required])], */
     });
-  }
-
-  verifyAddClient(event: KeyboardEvent) {
-    const formValues = this.assetContaForm.value;
-    const mes = formValues.mes;
-    console.log(mes);
   }
 
   getFormatDate(): any {
@@ -57,5 +50,12 @@ export class ContaCadastroComponent implements OnInit {
     } else {
       return null;
     }
+  }
+
+
+  deleteContas(contaId: string) {
+    const conta = this.contas.find(item => item.id === contaId) || {} as Contas;
+    const itemIndex = this.contas.indexOf(conta);
+    this.contas.splice(itemIndex, 1);
   }
 }
