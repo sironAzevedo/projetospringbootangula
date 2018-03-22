@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Conta } from '../../blog-model/blog-enum/tipoConta';
+import { Conta, Meses } from '../../blog-model/blog-enum/tipoConta';
 import { DateAdapter, NativeDateAdapter } from '@angular/material';
 import { Observer } from 'rxjs';
 
@@ -12,6 +12,7 @@ import { Observer } from 'rxjs';
 export class ContaCadastroComponent implements OnInit {
 
   assetContaForm: FormGroup;
+  meses: string[] = Object.keys(Meses);
   tipoConta = [
     { id: '1', name: Conta.ALUGUEL },
     { id: '2', name: Conta.AGUA },
@@ -29,9 +30,13 @@ export class ContaCadastroComponent implements OnInit {
 
   ngOnInit() {
     this.assetContaForm = this.formBuilder.group({
+      mes: [''],
+      salario: [''],
       conta: [''],
-      assunto: [''],
-      dataVencimento: ['']
+      valorConta: [''],
+      dataVencimento: [''],
+      dataPagamento: [''],
+      comentario: ['']
       /* pessoaNome: ['', Validators.compose([Validators.required])],
       emailCliente: ['', Validators.email],
       registroAtivo: ['', Validators.compose([Validators.required])], */
@@ -40,8 +45,8 @@ export class ContaCadastroComponent implements OnInit {
 
   verifyAddClient(event: KeyboardEvent) {
     const formValues = this.assetContaForm.value;
-    const dataVencimento = formValues.dataVencimento;
-    console.log(dataVencimento);
+    const mes = formValues.mes;
+    console.log(mes);
   }
 
   getFormatDate(): any {

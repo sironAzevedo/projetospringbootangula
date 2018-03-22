@@ -10,6 +10,8 @@ import { DialogBlogEmailComponent } from './components/dialog-blog-email/dialog-
 import { DialogMessageComponent } from './components/dialog-message/dialog-message.component';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { DateFormatPipe } from './pipes/date-format.pipe';
+import { SimpleListComponent } from './components/simple-list/simple-list.component';
+import { CurrencyMaskDirective } from './directives/currency-mask.directive';
 
 @NgModule({
     imports: [
@@ -30,6 +32,8 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
         DialogBlogEmailComponent,
         DialogMessageComponent,
         ToasterModule,
+        SimpleListComponent,
+        CurrencyMaskDirective
     ],
     declarations: [
         TextLengthPipe,
@@ -37,9 +41,11 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
         PvdHostDirective,
         AutofocusDirective,
         DialogBlogEmailComponent,
-        DialogMessageComponent
+        DialogMessageComponent,
+        SimpleListComponent,
+        CurrencyMaskDirective
     ],
     providers: [ToasterService],
-    entryComponents: [DialogBlogEmailComponent, DialogMessageComponent],
+    entryComponents: [DialogBlogEmailComponent, DialogMessageComponent, SimpleListComponent],
 })
 export class SharedModule { }
