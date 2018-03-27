@@ -30,7 +30,7 @@ import br.com.projeto.projetoCommon.valueobjects.Mensagem;
 import br.com.projeto.repository.PessoaRepository;
 import br.com.projeto.service.impl.emailImpl;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:8000")
 @RestController
 @RequestMapping("/service")
 public class PessoaService {
