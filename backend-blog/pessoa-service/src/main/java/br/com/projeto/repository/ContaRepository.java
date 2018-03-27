@@ -8,6 +8,8 @@ import br.com.projeto.model.ContaModel;
 
 public interface ContaRepository extends Repository<ContaModel, Integer> {
 
+	// public ContaModel salvarConta(ContaModel conta);
+
 	void save(ContaModel conta);
 
 	void delete(ContaModel conta);

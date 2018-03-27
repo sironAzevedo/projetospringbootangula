@@ -36,7 +36,7 @@ public class ContaService {
 
 		try {
 
-			this.contaRepository.save(conta);
+//			this.contaRepository.save(conta);
 
 			return new ResponseModel(1, "Registro salvo com sucesso!");
 
@@ -57,7 +57,7 @@ public class ContaService {
 
 		try {
 
-			this.contaRepository.save(conta);
+//			this.contaRepository.save(conta);
 
 			return new ResponseModel(1, "Registro atualizado com sucesso!");
 
