@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.Repository;
 
-import br.com.projeto.model.ContaModel;
+import br.com.projeto.model.entity.ContaModel;
 
 public interface ContaRepository extends Repository<ContaModel, Integer> {
 

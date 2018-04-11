@@ -1,4 +1,7 @@
-package br.com.projeto.model;
+package br.com.projeto.model.entity;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,20 +13,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Table(name = "tb_mes_salario")
 @Entity
-public class MesSalario {
+public class MesSalario implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_mes_salario")
 	private Integer codigo;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_mes", nullable = true)
+	@JoinColumn(name = "id_mes", nullable = false)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Mes mes;
 
 	@Column(name = "valor_salario")
-	private Integer valorSalario;
+	private BigDecimal valorSalario;
 
 	public Integer getCodigo() {
 		return codigo;
@@ -41,11 +51,11 @@ public class MesSalario {
 		this.mes = mes;
 	}
 
-	public Integer getValorSalario() {
+	public BigDecimal getValorSalario() {
 		return valorSalario;
 	}
 
-	public void setValorSalario(Integer valorSalario) {
+	public void setValorSalario(BigDecimal valorSalario) {
 		this.valorSalario = valorSalario;
 	}
 

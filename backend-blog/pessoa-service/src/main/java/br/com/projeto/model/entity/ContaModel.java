@@ -1,5 +1,6 @@
-package br.com.projeto.model;
+package br.com.projeto.model.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Table(name = "tb_conta")
 @Entity
 public class ContaModel {
@@ -26,7 +29,7 @@ public class ContaModel {
 	private String tipoConta;
 
 	@Column(name = "valor_conta")
-	private Integer valorConta;
+	private BigDecimal valorConta;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_vencimento")
@@ -41,6 +44,7 @@ public class ContaModel {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_mes_salario", nullable = true)
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private MesSalario mesSalario;
 
 	public Integer getCodigo() {
@@ -59,11 +63,11 @@ public class ContaModel {
 		this.tipoConta = tipoConta;
 	}
 
-	public Integer getValorConta() {
+	public BigDecimal getValorConta() {
 		return valorConta;
 	}
 
-	public void setValorConta(Integer valorConta) {
+	public void setValorConta(BigDecimal valorConta) {
 		this.valorConta = valorConta;
 	}
 

@@ -8,8 +8,6 @@ CREATE TABLE IF NOT EXISTS tb_pessoa
     fl_ativo bit not null
 );
 
-/*ALTER TABLE tb_pessoa ADD ds_email VARCHAR (100) not null;*/
-
 CREATE TABLE IF NOT EXISTS tb_mes
 (
 	id_mes int primary key auto_increment not null,
@@ -20,7 +18,7 @@ CREATE TABLE IF NOT EXISTS tb_mes_salario
 (
 	id_mes_salario int primary key auto_increment not null,
     id_mes int not null,
-    valor_salario int,
+    valor_salario decimal(10,2) not null,
     FOREIGN KEY (id_mes) REFERENCES tb_mes(id_mes)
 );
 
@@ -28,10 +26,10 @@ CREATE TABLE IF NOT EXISTS tb_conta
 (
 	id_conta int primary key auto_increment not null,
     tipo_conta varchar(100) not null,
-    valor_conta int not null,
+    valor_conta decimal(10,2) not null,
     data_vencimento Date not null,
     data_pagamento Date not null,
-    ds_comentario varchar(500) not null,
+    ds_comentario varchar(500),
     id_mes_salario int not null, 
    
     FOREIGN KEY (id_mes_salario) REFERENCES tb_mes_salario(id_mes_salario)

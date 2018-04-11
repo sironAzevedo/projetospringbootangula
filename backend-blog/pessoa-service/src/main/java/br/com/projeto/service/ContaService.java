@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.projeto.model.ContaModel;
-import br.com.projeto.model.PessoaModel;
-import br.com.projeto.model.ResponseModel;
+import br.com.projeto.model.entity.ContaModel;
+import br.com.projeto.model.entity.ResponseModel;
 import br.com.projeto.repository.ContaRepository;
 
 @CrossOrigin(origins = "http://localhost:8000")

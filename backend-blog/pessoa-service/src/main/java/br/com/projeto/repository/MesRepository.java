@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.Repository;
 
-import br.com.projeto.model.Mes;
+import br.com.projeto.model.entity.Mes;
 
 public interface MesRepository extends Repository<Mes, Integer> {
 

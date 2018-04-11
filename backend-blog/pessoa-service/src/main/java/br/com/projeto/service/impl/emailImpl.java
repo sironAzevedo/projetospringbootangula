@@ -1,6 +1,6 @@
 package br.com.projeto.service.impl;
 
-import br.com.projeto.projetoCommon.valueobjects.Mensagem;
+import br.com.projeto.projetoCommon.valueObjects.Mensagem;
 import br.com.projeto.service.email.MailConfig;
 
 /**

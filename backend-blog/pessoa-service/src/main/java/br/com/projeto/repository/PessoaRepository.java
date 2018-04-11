@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.Repository;
 
-import br.com.projeto.model.PessoaModel;
+import br.com.projeto.model.entity.PessoaModel;
 
 public interface PessoaRepository extends Repository<PessoaModel, Integer> {
 

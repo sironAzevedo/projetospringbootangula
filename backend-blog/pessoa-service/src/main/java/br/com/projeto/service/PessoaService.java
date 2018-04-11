@@ -24,9 +24,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.projeto.model.PessoaModel;
-import br.com.projeto.model.ResponseModel;
-import br.com.projeto.projetoCommon.valueobjects.Mensagem;
+import br.com.projeto.model.entity.PessoaModel;
+import br.com.projeto.model.entity.ResponseModel;
+import br.com.projeto.projetoCommon.valueObjects.Mensagem;
 import br.com.projeto.repository.PessoaRepository;
 import br.com.projeto.service.impl.emailImpl;
 

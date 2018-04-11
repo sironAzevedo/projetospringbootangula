@@ -1,4 +1,4 @@
-package br.com.projeto.projetoCommon.valueobjects;
+package br.com.projeto.projetoCommon.valueObjects;
 
 import java.io.Serializable;
 import java.util.Set;

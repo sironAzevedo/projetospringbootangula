@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.data.repository.Repository;
 
-import br.com.projeto.model.MesSalario;
+import br.com.projeto.model.entity.MesSalario;
 
 public interface MesSalarioRepository extends Repository<MesSalario, Integer> {
 
-	void save(MesSalario mesSalario);
+	MesSalario save(MesSalario mesSalario);
 
 	void delete(MesSalario mesSalario);
 

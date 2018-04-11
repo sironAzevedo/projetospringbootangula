@@ -1,4 +1,4 @@
-package br.com.projeto.model;
+package br.com.projeto.model.entity;
 
 public class ResponseModel {
 	private int codigo;

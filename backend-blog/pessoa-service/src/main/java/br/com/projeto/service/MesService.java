@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.projeto.model.Mes;
+import br.com.projeto.model.entity.Mes;
 import br.com.projeto.repository.MesRepository;
 
 @CrossOrigin(origins = "http://localhost:8000")

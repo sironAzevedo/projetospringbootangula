@@ -25,8 +25,8 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import br.com.projeto.projetoCommon.util.SimpleAuth;
-import br.com.projeto.projetoCommon.valueobjects.DestinatarioVO;
-import br.com.projeto.projetoCommon.valueobjects.Mensagem;
+import br.com.projeto.projetoCommon.valueObjects.DestinatarioVO;
+import br.com.projeto.projetoCommon.valueObjects.Mensagem;
 
 public class MailConfig {
 
