@@ -94,6 +94,7 @@ public class MesSalarioService {
 		return this.mesSalarioRepository.findOne(codigo);
 	}
 
+	//Estou fazendo esse metodo
 	@RequestMapping(value = "/salario/mes/{codigoMes}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody MesSalario buscarMesSalarioPorMes(@PathVariable("codigo") Integer codigoMes) {
 
