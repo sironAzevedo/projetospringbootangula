@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Table(name = "tb_mes_salario")
+@Table(name = "tb_mes_salario", schema="blog")
 @Entity
 public class MesSalario implements Serializable {
 
@@ -27,7 +27,7 @@ public class MesSalario implements Serializable {
 	@Column(name = "id_mes_salario")
 	private Integer codigo;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity=Mes.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_mes", nullable = false)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Mes mes;

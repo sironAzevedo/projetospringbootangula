@@ -39,7 +39,7 @@ public class MesSalarioService {
 	 */
 	@RequestMapping(value = "/salario", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody ResponseEntity<?> salvar(@RequestBody MesSalarioVO vo) {
-		logger.info("Salvar Mes Salario", vo);
+		logger.info("Salvar Mes Salario", vo.toString());
 
 		MesSalario salario = new MesSalario();
 
@@ -57,11 +57,18 @@ public class MesSalarioService {
 	 * @return
 	 */
 	@RequestMapping(value = "/salario", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public @ResponseBody ResponseModel atualizar(@RequestBody MesSalario mesSalario) {
+	public @ResponseBody ResponseModel atualizar(@RequestBody MesSalarioVO vo) {
+		logger.info("Atualizar Mes Salario", vo.toString());
+
+		MesSalario salario = new MesSalario();
 
 		try {
 
-			this.mesSalarioRepository.save(mesSalario);
+			salario.setCodigo(vo.getCodigo());
+			salario.setMes(vo.getMes());
+			salario.setValorSalario(vo.getValorSalario());
+
+			this.mesSalarioRepository.save(salario);
 
 			return new ResponseModel(1, "Registro atualizado com sucesso!");
 
@@ -78,6 +85,7 @@ public class MesSalarioService {
 	 */
 	@RequestMapping(value = "/salario", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody List<MesSalario> consultar() {
+		logger.info("consultar Mes Salario");
 
 		return this.mesSalarioRepository.findAll();
 	}
@@ -94,7 +102,7 @@ public class MesSalarioService {
 		return this.mesSalarioRepository.findOne(codigo);
 	}
 
-	//Estou fazendo esse metodo
+	// Estou fazendo esse metodo
 	@RequestMapping(value = "/salario/mes/{codigoMes}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public @ResponseBody MesSalario buscarMesSalarioPorMes(@PathVariable("codigo") Integer codigoMes) {
 
