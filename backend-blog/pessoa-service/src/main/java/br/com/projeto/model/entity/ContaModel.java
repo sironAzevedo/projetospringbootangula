@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Table(name = "tb_conta")
@@ -33,10 +34,12 @@ public class ContaModel {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_vencimento")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataVencimento;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_pagamento")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataPagamento;
 
 	@Column(name = "ds_comentario")
