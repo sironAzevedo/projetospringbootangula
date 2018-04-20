@@ -1,4 +1,4 @@
-package br.com.projeto.service;
+package br.com.projeto.resource;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import br.com.projeto.repository.MesRepository;
 @CrossOrigin(origins = "http://localhost:8000")
 @RestController
 @RequestMapping("/service")
-public class MesService {
+public class MesResource {
 
 	@Autowired
 	private MesRepository mesRepository;

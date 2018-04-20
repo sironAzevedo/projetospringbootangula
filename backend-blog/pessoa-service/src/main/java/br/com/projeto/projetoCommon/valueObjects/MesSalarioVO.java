@@ -7,13 +7,18 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import br.com.projeto.model.entity.Mes;
 
 public class MesSalarioVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Integer codigo;
+
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Mes mes;
+
 	private BigDecimal valorSalario;
 
 	public MesSalarioVO() {

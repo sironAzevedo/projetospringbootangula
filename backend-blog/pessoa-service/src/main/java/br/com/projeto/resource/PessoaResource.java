@@ -1,4 +1,4 @@
-package br.com.projeto.service;
+package br.com.projeto.resource;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,7 +33,7 @@ import br.com.projeto.service.impl.emailImpl;
 @CrossOrigin(origins = "http://localhost:8000")
 @RestController
 @RequestMapping("/service")
-public class PessoaService {
+public class PessoaResource {
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
